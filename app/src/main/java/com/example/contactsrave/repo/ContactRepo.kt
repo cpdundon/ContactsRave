@@ -19,7 +19,11 @@ object ContactRepo {
     suspend fun getContact(
         id: Long, context: Context,
     ): Contact? {
-        return ContactDatabase.getDatabase(context).contactDao().findContact(id)
+        return if (id == 0L) {
+            Contact(null, null, null)
+        } else {
+            ContactDatabase.getDatabase(context).contactDao().findContact(id)
+        }
     }
 
 }

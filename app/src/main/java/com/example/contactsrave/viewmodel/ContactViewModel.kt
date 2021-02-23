@@ -40,11 +40,6 @@ class ContactViewModel : ViewModel() {
 
     fun fetchContact(id: Long, context: Context)
     {
-        if (id == 0L) {
-            _contact.value = Contact(null, null, null)
-            return
-        }
-
         viewModelScope.launch(Dispatchers.IO) {
             ContactRepo.getContact(id, context).let{
                 _contact.postValue(it)
