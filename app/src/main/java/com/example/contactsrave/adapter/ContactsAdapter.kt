@@ -37,7 +37,16 @@ class ContactsAdapter(private val contacts: List<Contact>) :
                 binding.apply {
                     tvFirstName.text = it.first_name
                     tvLastName.text = it.last_name
-                    tvInitials.text = it.first_name + it.last_name + " -> "
+                    var first = it.first_name.toString()
+                    if (first.isNotEmpty()) {
+                        first = first[0].toString()
+                    }
+                    var last = it.last_name.toString()
+                    if (last.isNotEmpty()) {
+                        last = last[0].toString()
+                    }
+
+                    tvInitials.text = "$first$last -> "
                 }
             }
             setListeners(contact)
