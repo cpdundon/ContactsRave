@@ -24,7 +24,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/et_first_name"
-        app:layout_constraintBottom_toTopOf=""
+        app:layout_constraintBottom_toTopOf="@id/et_email"
         android:hint="Last Name"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
 
@@ -35,11 +35,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/et_last_name"
-        app:layout_constraintBottom_toTopOf=""
+        app:layout_constraintBottom_toTopOf="@id/btn_apply"
         android:hint="eMail"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_apply"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/et_email"

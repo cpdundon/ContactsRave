@@ -1,5 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/selectContactFragment">
 
+    <fragment
+        android:id="@+id/addEditContact"
+        android:name="com.example.contactsrave.view.AddEditContact"
+        android:label="AddEditContact" >
+        <argument
+            android:name="id"
+            app:argType="long" />
+    </fragment>
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.example.contactsrave.view.MainActivity"
+        android:label="activity_main"
+        tools:layout="@layout/activity_main" />
+    <fragment
+        android:id="@+id/selectContactFragment"
+        android:name="com.example.contactsrave.view.SelectContactFragment"
+        android:label="fragment_select_contact"
+        tools:layout="@layout/fragment_select_contact" >
+        <action
+            android:id="@+id/action_selectContactFragment_to_addEditContact"
+            app:destination="@id/addEditContact" />
+    </fragment>
 </navigation>
