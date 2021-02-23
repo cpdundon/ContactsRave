@@ -59,8 +59,7 @@ class AddEditContact : Fragment() {
     private fun setUpObservers() {
         viewModel.contacts.observe(viewLifecycleOwner,
             Observer<List<Contact>> {
-                loadInfo(it)
-                Log.i(TAG, "setUpObservers: -> $it")
+                Log.i(TAG, "setUpObservers: First eMail -> ${it[0].eMail}")
             })
 
         viewModel.updateRtn.observe(viewLifecycleOwner,
@@ -70,38 +69,33 @@ class AddEditContact : Fragment() {
 
         viewModel.contact.observe(viewLifecycleOwner,
             Observer<Contact> {
+                contact = it
+                loadInfo()
                 Log.i(TAG, "setUpObservers: return from get contact in viewModel -> ${it.id} ${it.first_name.toString()}")
             })
-        
     }
 
     private fun saveInformation(){
 
-        val contact: Contact
-        binding.apply{
-            contact = Contact(this.etFirstName.text.toString(),
-                this.etLastName.text.toString(),
-                this.etEmail.text.toString())
+
+        binding.let{
+            contact.apply{
+                eMail = it.etEmail.text.toString()
+                first_name = it.etFirstName.text.toString()
+                last_name = it.etLastName.text.toString()
+            }
         }
 
         viewModel.updateContact(contact, requireContext())
     }
 
-    private fun loadInfo(contacts: List<Contact>) {
-        //Present to the user...
-    }
-
-    private fun getGridLayoutMgr(horizontal: Boolean = false, gridToggle: Boolean = false): RecyclerView.LayoutManager {
-        val const = if (horizontal) {
-            LinearLayoutManager.HORIZONTAL
-        } else {
-            LinearLayoutManager.VERTICAL
-        }
-
-        return if (gridToggle) {
-            GridLayoutManager(this.context, 2)
-        } else {
-            LinearLayoutManager(this.context, const, false)
+    private fun loadInfo() {
+        contact.let{
+            binding.apply {
+                etEmail.setText(it.eMail)
+                etFirstName.setText(it.first_name)
+                etLastName.setText(it.last_name)
+            }
         }
     }
 
