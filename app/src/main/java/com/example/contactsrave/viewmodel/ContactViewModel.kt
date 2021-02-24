@@ -11,6 +11,7 @@ import com.example.contactsrave.repo.ContactRepo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+@ExperimentalStdlibApi
 class ContactViewModel : ViewModel() {
     companion object {
         private const val TAG = "ContactsViewModel"

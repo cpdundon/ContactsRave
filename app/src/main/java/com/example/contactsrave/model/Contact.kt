@@ -12,7 +12,8 @@ import kotlinx.android.parcel.Parcelize
 class Contact @JvmOverloads constructor(
             var first_name: String?,
             var last_name: String?,
-            var eMail: String?
+            var eMail: String?,
+            var addresses: List<Address> = listOf()
         ): Parcelable {
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0

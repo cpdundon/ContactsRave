@@ -12,6 +12,9 @@
         <argument
             android:name="id"
             app:argType="long" />
+        <action
+            android:id="@+id/action_addEditContact_to_addressEditFragment"
+            app:destination="@id/addressEditFragment" />
     </fragment>
     <activity
         android:id="@+id/mainActivity"
@@ -26,5 +29,31 @@
         <action
             android:id="@+id/action_selectContactFragment_to_addEditContact"
             app:destination="@id/addEditContact" />
+    </fragment>
+    <fragment
+        android:id="@+id/addressCardFragment"
+        android:name="com.example.contactsrave.view.AddressCardFragment"
+        android:label="AddressCardFragment" >
+        <argument
+            android:name="contactId"
+            app:argType="long" />
+        <argument
+            android:name="addressId"
+            app:argType="long" />
+    </fragment>
+    <fragment
+        android:id="@+id/contactFragment"
+        android:name="com.example.contactsrave.view.ContactFragment"
+        android:label="ContactFragment" />
+    <fragment
+        android:id="@+id/addressEditFragment"
+        android:name="com.example.contactsrave.view.AddressEditFragment"
+        android:label="AddressEditFragment" >
+        <argument
+            android:name="contactId"
+            app:argType="long" />
+        <argument
+            android:name="addressId"
+            app:argType="long" />
     </fragment>
 </navigation>

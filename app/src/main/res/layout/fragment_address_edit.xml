@@ -4,26 +4,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".view.SelectContactFragment">
+    tools:context="view.AddressEditFragment"
+    android:id="@+id/constraint_address_edit">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_contacts"
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/et_address_one"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/btn_fetch"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-
-        />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btn_apply"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"/>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_fetch"
+        android:id="@+id/btn_apply"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/rv_contacts"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="New Contact"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"/>
+        app:layout_constraintTop_toBottomOf="@id/et_address_one"
+        android:text="Apply"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

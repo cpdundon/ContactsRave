@@ -4,6 +4,7 @@ import android.content.Context
 import com.example.contactsrave.database.ContactDatabase
 import com.example.contactsrave.model.Contact
 
+@ExperimentalStdlibApi
 object ContactRepo {
     suspend fun getContacts(
         context: Context,
@@ -20,7 +21,7 @@ object ContactRepo {
         id: Long, context: Context,
     ): Contact? {
         return if (id == 0L) {
-            Contact(null, null, null)
+            Contact(null, null, null, listOf())
         } else {
             ContactDatabase.getDatabase(context).contactDao().findContact(id)
         }

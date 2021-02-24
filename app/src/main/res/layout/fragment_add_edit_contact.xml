@@ -35,15 +35,36 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/et_last_name"
-        app:layout_constraintBottom_toTopOf="@id/btn_apply"
+        app:layout_constraintBottom_toTopOf="@id/rv_addresses"
         android:hint="eMail"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_addresses"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/et_email"
+        app:layout_constraintBottom_toTopOf="@id/btn_new_address"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_new_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rv_addresses"
+        app:layout_constraintBottom_toTopOf="@id/btn_apply"
+        android:text="New Address"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+        />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_apply"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/et_email"
+        app:layout_constraintTop_toBottomOf="@id/btn_new_address"
         android:text="Apply"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
         />

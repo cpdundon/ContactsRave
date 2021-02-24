@@ -11,18 +11,16 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.contactsrave.adapter.ContactsAdapter
-import com.example.contactsrave.databinding.FragmentAddEditContactBinding
 import com.example.contactsrave.databinding.FragmentSelectContactBinding
 import com.example.contactsrave.model.Contact
 import com.example.contactsrave.viewmodel.ContactViewModel
-import kotlinx.android.synthetic.main.fragment_select_contact.*
 
-
+@ExperimentalStdlibApi
 class SelectContactFragment : Fragment() {
         private val TAG = "SelectContactFragment"
         private lateinit var binding: FragmentSelectContactBinding
         private val viewModel = ContactViewModel()
-        private val default_id = 0L
+        private val defaultId = 0L
 
         override fun onCreateView(
             inflater: LayoutInflater,
@@ -45,7 +43,7 @@ class SelectContactFragment : Fragment() {
 
     private fun setUpListeners() {
         binding.btnFetch.setOnClickListener(View.OnClickListener {
-            val action = SelectContactFragmentDirections.actionSelectContactFragmentToAddEditContact(default_id)
+            val action = SelectContactFragmentDirections.actionSelectContactFragmentToAddEditContact(defaultId)
             findNavController().navigate(action)
         })
     }
