@@ -29,7 +29,9 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/guideline_15"
-        tools:text="H -> "/>
+        android:textAppearance="?textAppearanceListItem"
+        tools:text="H -> "
+        android:gravity="start"/>
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_zip_code"
@@ -39,7 +41,9 @@
         app:layout_constraintEnd_toStartOf="@id/guideline_40"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:text="11552"/>
+        android:textAppearance="?textAppearanceListItem"
+        tools:text="11552"
+        android:gravity="start"/>
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_address_one"
@@ -49,5 +53,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:text="286 Walton Street"/>
+        android:textAppearance="?textAppearanceListItem"
+        tools:text="286 Walton Street"
+        android:gravity="start"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -21,7 +21,7 @@ object ContactRepo {
         id: Long, context: Context,
     ): Contact? {
         return if (id == 0L) {
-            Contact(null, null, null, listOf())
+            Contact(null, null, null, null, listOf())
         } else {
             ContactDatabase.getDatabase(context).contactDao().findContact(id)
         }

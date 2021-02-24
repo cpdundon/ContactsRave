@@ -12,7 +12,9 @@ import com.example.contactsrave.databinding.FragmentAddEditContactBinding
 import com.example.contactsrave.databinding.FragmentAddressEditBinding
 import com.example.contactsrave.model.Address
 import com.example.contactsrave.model.Contact
+import com.example.contactsrave.model.constant.addressType.EnumAddressType
 import com.example.contactsrave.viewmodel.ContactViewModel
+import kotlinx.android.synthetic.main.fragment_address_edit.*
 
 @ExperimentalStdlibApi
 class AddressEditFragment : Fragment() {
@@ -83,7 +85,17 @@ class AddressEditFragment : Fragment() {
     private fun saveInformation(){
         binding.let{
             address.apply{
-                this.street_one = it.etAddressOne.text.toString()
+                street_one = it.etAddressOne.text.toString()
+                street_two = it.etAddressTwo.text.toString()
+                state = it.etAddressState.text.toString()
+                zip_code = it.etZipCode.text.toString()
+
+                address.type = when {
+                    it.radioHome.isChecked -> EnumAddressType.Home
+                    it.radioMailing.isChecked -> EnumAddressType.Mailing
+                    it.radioSummer.isChecked -> EnumAddressType.Summer
+                    else -> EnumAddressType.Work
+                }
             }
         }
 
@@ -94,7 +106,16 @@ class AddressEditFragment : Fragment() {
         address.let{
             binding.apply {
                 this.etAddressOne.setText(it.street_one)
+                this.etAddressTwo.setText(it.street_two)
+                this.etAddressState.setText(it.state)
+                this.etZipCode.setText(it.zip_code)
+                when(it.type) {
+                    EnumAddressType.Mailing -> binding.radioMailing.isChecked = true
+                    EnumAddressType.Summer -> binding.radioSummer.isChecked = true
+                    EnumAddressType.Work -> binding.radioWork.isChecked = true
+                    else -> binding.radioHome.isChecked = true
+                    }
+                }
             }
         }
     }
-}
