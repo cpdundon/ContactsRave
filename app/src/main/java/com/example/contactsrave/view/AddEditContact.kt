@@ -35,7 +35,7 @@ class AddEditContact : Fragment() {
     private lateinit var binding: FragmentAddEditContactBinding
     private val viewModel = ContactViewModel()
     private val arguments by navArgs<AddEditContactArgs>()
-    private lateinit var contact: Contact
+    private var contact = Contact("","","","", listOf())
     private var addAddressAfterSave = false
 
     override fun onCreateView(
@@ -53,10 +53,10 @@ class AddEditContact : Fragment() {
 
         val id = arguments.id
 
-        setUpObservers()
+        setUpObservers(id)
         setUpListeners()
         binding.rvAddresses.layoutManager = getGridLayoutMgr()
-        viewModel.fetchContact(id, requireContext())
+        viewModel.getContact(id, requireContext())
     }
 
     private fun setUpListeners() {
@@ -70,33 +70,43 @@ class AddEditContact : Fragment() {
         })
     }
 
-    private fun setUpObservers() {
-        viewModel.contacts.observe(viewLifecycleOwner,
+    private fun setUpObservers(id: Long) {
+        viewModel.getContacts(requireContext()).observe(viewLifecycleOwner,
             Observer<List<Contact>> {
-                Log.i(TAG, "setUpObservers: First eMail -> ${it[0].eMail}")
+                val eMail = if (it.isNotEmpty()) {
+                    it[0].eMail
+                } else
+                    ""
+
+                Log.i(TAG, "setUpObservers: First eMail -> $eMail")
             })
 
         viewModel.updateRtn.observe(viewLifecycleOwner,
             Observer<Long> {
                 Log.i(TAG, "setUpObservers: return from viewModel -> $it")
-                viewModel.fetchContact(it, requireContext())
+                viewModel.getContact(it, requireContext())
             })
 
-        viewModel.contact.observe(viewLifecycleOwner,
-            Observer<Contact> {
-                contact = it
+        if (id != 0L) {
+            viewModel.getContact(id, requireContext()).observe(viewLifecycleOwner,
+                    Observer<Contact> {
+                        contact = it
 
-                if (addAddressAfterSave) {
-                    addAddressAfterSave = false
-                    addAddress(requireView())
-                }
+                        if (addAddressAfterSave) {
+                            addAddressAfterSave = false
+                            addAddress(requireView())
+                        }
 
-                loadInfo()
-                Log.i(TAG, "setUpObservers: return from get contact in viewModel -> ${it.id} ${it.first_name.toString()}")
-            })
+                        loadInfo()
+                        Log.i(TAG, "setUpObservers: return from get contact in viewModel -> ${it.id} ${it.first_name.toString()}")
+                    })
+        }
     }
 
     private fun saveInformation(){
+        if (contact == null)
+            return
+
         binding.let{
             contact.apply{
                 eMail = it.etEmail.text.toString()

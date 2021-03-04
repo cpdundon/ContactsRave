@@ -38,7 +38,7 @@ class SelectContactFragment : Fragment() {
             setUpListeners()
             setUpObservers()
             binding.rvContacts.layoutManager = getGridLayoutMgr()
-            viewModel.fetchContacts(requireContext())
+            viewModel.getContacts(requireContext())
         }
 
     private fun setUpListeners() {
@@ -49,7 +49,7 @@ class SelectContactFragment : Fragment() {
     }
 
     private fun setUpObservers() {
-        viewModel.contacts.observe(viewLifecycleOwner,
+        viewModel.getContacts(requireContext()).observe(viewLifecycleOwner,
             Observer<List<Contact>> {
                 val contactsAdapter = ContactsAdapter(it)
                 binding.rvContacts.adapter = contactsAdapter

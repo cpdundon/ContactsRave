@@ -3,14 +3,15 @@ package com.example.contactsrave.database
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.contactsrave.model.Contact
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ContactDao {
     @Query("SELECT * FROM Contact ORDER BY last_name, first_name")
-    suspend fun findContacts(): List<Contact>?
+    fun findContacts(): Flow<List<Contact>>
 
     @Query("SELECT * FROM Contact WHERE id = :id LIMIT 1")
-    suspend fun findContact(id: Long): Contact?
+    fun findContact(id: Long): Flow<Contact>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(contact: Contact): Long

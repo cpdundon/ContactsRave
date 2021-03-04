@@ -23,7 +23,8 @@ class AddressEditFragment : Fragment() {
     private val viewModel = ContactViewModel()
     private val arguments by navArgs<AddressEditFragmentArgs>()
     private lateinit var contact: Contact
-    private lateinit var address: Address
+    private var address = Address("","","","", EnumAddressType.Home)
+    private var contactId = -1L
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,12 +39,12 @@ class AddressEditFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val contactId = arguments.contactId
+        contactId = arguments.contactId
 
         setUpObservers()
         setUpListeners()
 
-        viewModel.fetchContact(contactId, requireContext())
+        viewModel.getContact(contactId, requireContext())
     }
 
     private fun setUpListeners() {
@@ -58,7 +59,7 @@ class AddressEditFragment : Fragment() {
                 Log.i(TAG, "setUpObservers: return from viewModel -> $it")
             })
 
-        viewModel.contact.observe(viewLifecycleOwner,
+        viewModel.getContact(contactId, requireContext()).observe(viewLifecycleOwner,
             Observer<Contact> {
                 contact = it
 

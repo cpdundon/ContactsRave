@@ -2,10 +2,7 @@ package com.example.contactsrave.viewmodel
 
 import android.content.Context
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.contactsrave.model.Contact
 import com.example.contactsrave.repo.ContactRepo
 import kotlinx.coroutines.Dispatchers
@@ -21,8 +18,10 @@ class ContactViewModel : ViewModel() {
     private val _contact = MutableLiveData<Contact>()
     private val _updateRtn = MutableLiveData<Long>()
 
-    val contacts: LiveData<List<Contact>>
-        get() = _contacts
+    fun getContacts (context: Context) = ContactRepo.getContacts(context).asLiveData(viewModelScope.coroutineContext)
+    fun getContact (id: Long, context: Context) = ContactRepo.getContact(id, context).asLiveData(viewModelScope.coroutineContext)
+//    val contacts: LiveData<List<Contact>>
+//        get() = _contacts
 
     val contact: LiveData<Contact>
         get() = _contact
@@ -30,23 +29,23 @@ class ContactViewModel : ViewModel() {
     val updateRtn: LiveData<Long>
         get() = _updateRtn
 
-    fun fetchContacts(context: Context)
-    {
-        viewModelScope.launch(Dispatchers.IO) {
-            ContactRepo.getContacts(context).let{
-                _contacts.postValue(it)
-            }
-        }
-    }
+//    fun fetchContacts(context: Context)
+//    {
+//        viewModelScope.launch(Dispatchers.IO) {
+//            ContactRepo.getContacts(context).let{
+//                _contacts.postValue(it)
+//            }
+//        }
+//    }
 
-    fun fetchContact(id: Long, context: Context)
-    {
-        viewModelScope.launch(Dispatchers.IO) {
-            ContactRepo.getContact(id, context).let{
-                _contact.postValue(it)
-            }
-        }
-    }
+//    fun fetchContact(id: Long, context: Context)
+//    {
+//        viewModelScope.launch(Dispatchers.IO) {
+//            ContactRepo.getContact(id, context).let{
+//                _contact.postValue(it)
+//            }
+//        }
+//    }
 
     fun updateContact(contact: Contact, context: Context) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -55,7 +54,7 @@ class ContactViewModel : ViewModel() {
             _updateRtn.postValue(rtn)
 
             if (rtn > 0L) {
-                fetchContacts(context)
+                getContacts(context)
             }
         }
     }

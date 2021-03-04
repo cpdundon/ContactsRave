@@ -56,6 +56,7 @@
         app:layout_constraintTop_toBottomOf="@id/et_address_one"
         app:layout_constraintBottom_toTopOf="@id/et_address_state"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+        android:nextFocusForward="@id/et_address_state"
         android:hint="Address Line 2"/>
 
     <com.google.android.material.textfield.TextInputEditText
@@ -66,6 +67,7 @@
         app:layout_constraintEnd_toStartOf="@id/et_zip_code"
         app:layout_constraintTop_toBottomOf="@id/et_address_two"
         app:layout_constraintBottom_toTopOf="@id/btn_apply"
+        android:nextFocusForward="@id/et_zip_code"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
         android:hint="State"/>
 
@@ -77,6 +79,7 @@
         app:layout_constraintTop_toBottomOf="@id/et_address_two"
         app:layout_constraintBottom_toTopOf="@id/btn_apply"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+        android:nextFocusForward="@id/radio_home"
         android:hint="Zip Code"/>
 
     <com.google.android.material.button.MaterialButton
